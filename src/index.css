@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900 font-sans antialiased;
+  }
+  a {
+    @apply text-blue-600 hover:underline;
+  }
+}
+
+@layer components {
+  .liquid-glass {
+    --c-glass: #bbbbbc;
+    --c-light: #fff;
+    --c-dark: #000;
+    --glass-reflex-dark: 1;
+    --glass-reflex-light: 1;
+    --saturation: 150%;
+
+    position: relative;
+    border-radius: 100vmax;
+    background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
+    box-shadow: 
+      inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
+      inset 1.8px 3px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 90%), transparent),
+      inset -2px -2px 0px -2px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 80%), transparent),
+      inset -3px -8px 1px -6px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 60%), transparent),
+      inset -0.3px -1px 4px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 12%), transparent),
+      inset -1.5px 2.5px 0px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+      inset 0px 3px 4px -2px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 20%), transparent),
+      inset 2px -6.5px 1px -4px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+      0px 1px 5px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 10%), transparent),
+      0px 6px 16px 0px color-mix(in srgb, var(--c-dark) calc(var(--glass-reflex-dark) * 8%), transparent);
+    z-index: 1;
+  }
+
+  .liquid-glass::after {
+    content: '';
+    position: absolute;
+    z-index: -2;
+    inset: 0;
+    border-radius: inherit;
+    -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
+    backdrop-filter: blur(8px) saturate(var(--saturation));
+    -webkit-filter: url(#container-glass);
+    filter: url(#container-glass);
+    overflow: hidden;
+    isolation: isolate;
+    pointer-events: none;
+  }
+}

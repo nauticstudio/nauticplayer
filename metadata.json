@@ -1,0 +1,5 @@
+{
+  "name": "NauticPlayer-WEB",
+  "description": "El reproductor de audio de alta fidelidad que mezcla por ti. Diseñado en exclusiva para macOS.",
+  "requestFramePermissions": []
+}
