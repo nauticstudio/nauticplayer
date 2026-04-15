@@ -5,13 +5,13 @@ import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
 import { DodoPayments } from 'dodopayments-checkout';
 import Success from './Success';
 
-const CHECKOUT_URL = 'https://test.checkout.dodopayments.com/buy/pdt_0NcmjeEtMuaKtasTFEYhA?quantity=1&redirect_url=https://nauticstudio.xyz%2Fsuccess&showDiscounts=false';
+const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcmjeEtMuaKtasTFEYhA?quantity=1&redirect_url=https://nauticstudio.xyz%2Fsuccess&showDiscounts=false';
 
 const CheckoutSection = () => {
   useEffect(() => {
-    // 1. Inicializar SDK en modo Test con displayType inline
+    // 1. Inicializar SDK en modo Live con displayType inline
     DodoPayments.Initialize({
-      mode: 'test',
+      mode: 'live',
       displayType: 'inline',
       onEvent: (event) => {
         if (event.event_type === 'checkout.pay_button_clicked') {
