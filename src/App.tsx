@@ -1,7 +1,41 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import GlassNavbar from './GlassNavbar';
 import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
+import { DodoPayments } from 'dodopayments-checkout';
+import Success from './Success';
+
+const CHECKOUT_URL = 'https://test.checkout.dodopayments.com/buy/pdt_0NcmjeEtMuaKtasTFEYhA?quantity=1&redirect_url=https://nauticstudio.xyz%2Fsuccess&showDiscounts=false';
+
+const CheckoutSection = () => {
+  useEffect(() => {
+    // 1. Inicializar SDK en modo Test con displayType inline
+    DodoPayments.Initialize({
+      mode: 'test',
+      displayType: 'inline',
+      onEvent: (event) => {
+        if (event.event_type === 'checkout.pay_button_clicked') {
+          console.log('Procesando pago...');
+        }
+      }
+    });
+
+    // 2. Abrir el checkout en el contenedor especificado
+    DodoPayments.Checkout.open({
+      checkoutUrl: CHECKOUT_URL,
+      elementId: 'dodo-inline-checkout'
+    });
+
+    // 3. Limpieza al desmontar el componente (Obligatorio)
+    return () => DodoPayments.Checkout.close();
+  }, []);
+
+  return (
+    <div style={{ backgroundColor: '#0d0d0d' }} className="w-full flex justify-center p-8 rounded-[2.5rem] mt-8 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] border border-white/5">
+      <div id="dodo-inline-checkout" className="w-full max-w-md" />
+    </div>
+  );
+};
 
 const ThemeShowcase = ({ lightImage = "/captures/player-wt.webp", darkImage = "/captures/player-bl.webp", className = "mt-12" }: { lightImage?: string, darkImage?: string, className?: string }) => {
   const [position, setPosition] = useState(50);
@@ -124,6 +158,11 @@ const GlassCard = ({ children, className = "", rounded = "rounded-[2rem]" }: any
 
 export default function App() {
   const [activeItem, setActiveItem] = useState<string>('');
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  if (currentPath === '/success') {
+    return <Success />;
+  }
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased relative">
@@ -181,7 +220,15 @@ export default function App() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
               </svg>
             </a>
-            <a href="#" className="relative inline-flex items-center justify-center px-8 py-3.5 bg-[#ff6213] rounded-[20px] text-white font-medium text-[16px] transition-all duration-300 hover:shadow-[0_8px_25px_-6px_rgba(255,98,19,0.5)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group shadow-[0_4px_15px_-4px_rgba(255,98,19,0.4)]">
+            <a 
+              href="#buy" 
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector('#buy')?.scrollIntoView({ behavior: 'smooth' });
+                setActiveItem('Buy');
+              }}
+              className="relative inline-flex items-center justify-center px-8 py-3.5 bg-[#ff6213] rounded-[20px] text-white font-medium text-[16px] transition-all duration-300 hover:shadow-[0_8px_25px_-6px_rgba(255,98,19,0.5)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group shadow-[0_4px_15px_-4px_rgba(255,98,19,0.4)]"
+            >
               <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-[#e55005] to-[#ff7d3a] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] skew-x-[30deg] transition-all duration-700 ease-out group-hover:translate-x-[150%]"></span>
               Buy Now - $19.99
@@ -537,26 +584,21 @@ export default function App() {
           </div>
         </section>
 
-        {/* CTA */}
         <section id="buy" className="text-center pt-8 border-t border-gray-100 scroll-mt-32">
           <div className="w-12 h-12 mx-auto rounded-[12px] flex items-center justify-center mb-6 overflow-hidden shadow-sm border border-black/5">
             <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
           </div>
-          <h3 className="text-2xl font-semibold mb-8 text-gray-900">Get NauticPlayer now.</h3>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
+          <h3 className="text-2xl font-semibold mb-2 text-gray-900">Get NauticPlayer now.</h3>
+          <p className="text-gray-500 mb-8 max-w-md mx-auto">One-time payment. Lifetime access with all features included.</p>
+          
+          <CheckoutSection />
+
+          <div className="mt-12">
             <a id="download" href="#" className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group scroll-mt-48">
               <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               Download Free Trial
               <svg className="ml-2.5 w-4 h-4 text-gray-600 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-              </svg>
-            </a>
-            <a href="#" className="relative inline-flex items-center justify-center px-8 py-3.5 bg-[#ff6213] rounded-[20px] text-white font-medium text-[16px] transition-all duration-300 hover:shadow-[0_8px_25px_-6px_rgba(255,98,19,0.5)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group shadow-[0_4px_15px_-4px_rgba(255,98,19,0.4)]">
-              <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-[#e55005] to-[#ff7d3a] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] skew-x-[30deg] transition-all duration-700 ease-out group-hover:translate-x-[150%]"></span>
-              Buy Now - $19.99
-              <svg className="ml-2.5 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
             </a>
           </div>
