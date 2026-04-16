@@ -4,7 +4,7 @@ import GlassNavbar from './GlassNavbar';
 import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
 import Success from './Success';
 
-const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcmjeEtMuaKtasTFEYhA?quantity=1&redirect_url=https://nauticstudio.xyz%2Fsuccess&showDiscounts=false';
+const CHECKOUT_URL = 'https://test.checkout.dodopayments.com/buy/pdt_0NcmjeEtMuaKtasTFEYhA?quantity=1&redirect_url=https://nauticstudio.xyz%2Fsuccess&showDiscounts=false';
 
 
 
@@ -132,12 +132,8 @@ export default function App() {
 
   const handleBuyClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log('Restoration V3: Scrolling to buy section...');
-    const element = document.getElementById('buy');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setActiveItem('Buy');
-    }
+    console.log('Redirecting to No-code Dodo Checkout...');
+    window.location.href = CHECKOUT_URL;
   };
 
   if (currentPath === '/success') {
