@@ -132,15 +132,11 @@ export default function App() {
 
   const handleBuyClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if ((window as any).DodoPayments) {
-      console.log('Abriendo Dodo Checkout (Overlay)...');
-      (window as any).DodoPayments.Checkout.open({
-        checkoutUrl: CHECKOUT_URL,
-      });
-    } else {
-      console.error('Dodo SDK no cargado aún. Reintentando por scroll...');
-      const element = document.getElementById('buy');
-      element?.scrollIntoView({ behavior: 'smooth' });
+    console.log('Restoration V3: Scrolling to buy section...');
+    const element = document.getElementById('buy');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActiveItem('Buy');
     }
   };
 
@@ -149,7 +145,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white font-sans antialiased relative">
+    <div className="min-h-screen bg-white font-sans antialiased relative" data-version="restoration-v3-stable">
       {/* 
         SVG Filter para la refracción proporcionado.
       */}
