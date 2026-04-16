@@ -2,47 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import GlassNavbar from './GlassNavbar';
 import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
-import { DodoPayments } from 'dodopayments-checkout';
 import Success from './Success';
 
 const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcmjeEtMuaKtasTFEYhA?quantity=1&redirect_url=https://nauticstudio.xyz%2Fsuccess&showDiscounts=false';
 
-// 1. Inicialización GLOBAL (Fuera de React) para máxima estabilidad
-console.log('Iniciando Dodo Payments SDK (Global Scope)...');
-DodoPayments.Initialize({
-  mode: 'live',
-  displayType: 'inline',
-  onEvent: (event) => {
-    console.log('Dodo Event:', event.event_type);
-    if (event.event_type === 'checkout.pay_button_clicked') {
-      console.log('Procesando pago...');
-    }
-  }
-});
 
-const CheckoutSection = () => {
-  useEffect(() => {
-    // 1. Abrir el checkout en el contenedor especificado
-    console.log('Abriendo Dodo Checkout...');
-    DodoPayments.Checkout.open({
-      checkoutUrl: CHECKOUT_URL,
-      elementId: 'dodo-inline-checkout'
-    });
-
-    // 2. Limpieza al desmontar el componente (Obligatorio)
-    // Esto destruye el iframe para evitar fugas de memoria o 'fantasmas'
-    return () => {
-      console.log('Cerrando Dodo Checkout (Cleanup)...');
-      DodoPayments.Checkout.close();
-    };
-  }, []);
-
-  return (
-    <div style={{ backgroundColor: '#0d0d0d' }} className="w-full flex justify-center p-8 rounded-[2.5rem] mt-8 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)] border border-white/5">
-      <div id="dodo-inline-checkout" className="w-full max-w-md" />
-    </div>
-  );
-};
 
 const ThemeShowcase = ({ lightImage = "/captures/player-wt.webp", darkImage = "/captures/player-bl.webp", className = "mt-12" }: { lightImage?: string, darkImage?: string, className?: string }) => {
   const [position, setPosition] = useState(50);
@@ -166,15 +130,17 @@ export default function App() {
   const [activeItem, setActiveItem] = useState<string>('');
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
-  const scrollToBuy = (e: React.MouseEvent) => {
+  const handleBuyClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    const element = document.getElementById('buy');
-    if (element) {
-      console.log('Scrolling to buy section...');
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setActiveItem('Buy');
+    if ((window as any).DodoPayments) {
+      console.log('Abriendo Dodo Checkout (Overlay)...');
+      (window as any).DodoPayments.Checkout.open({
+        checkoutUrl: CHECKOUT_URL,
+      });
     } else {
-      console.error('No se encontró la sección #buy');
+      console.error('Dodo SDK no cargado aún. Reintentando por scroll...');
+      const element = document.getElementById('buy');
+      element?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -240,7 +206,7 @@ export default function App() {
             </a>
             <a 
               href="#buy" 
-              onClick={scrollToBuy}
+              onClick={handleBuyClick}
               className="relative inline-flex items-center justify-center px-8 py-3.5 bg-[#ff6213] rounded-[20px] text-white font-medium text-[16px] transition-all duration-300 hover:shadow-[0_8px_25px_-6px_rgba(255,98,19,0.5)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group shadow-[0_4px_15px_-4px_rgba(255,98,19,0.4)]"
             >
               <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-[#e55005] to-[#ff7d3a] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -605,7 +571,14 @@ export default function App() {
           <h3 className="text-2xl font-semibold mb-2 text-gray-900">Get NauticPlayer now.</h3>
           <p className="text-gray-500 mb-8 max-w-md mx-auto">One-time payment. Lifetime access with all features included.</p>
           
-          <CheckoutSection />
+          <div className="flex justify-center">
+            <button 
+              onClick={handleBuyClick}
+              className="px-12 py-4 bg-[#ff6213] rounded-[20px] text-white font-semibold text-lg hover:shadow-[0_8px_25px_rgba(255,98,19,0.5)] transition-all hover:-translate-y-1"
+            >
+              Buy Now - $19.99
+            </button>
+          </div>
 
           <div className="mt-12">
             <a id="download" href="#" className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group scroll-mt-48">
