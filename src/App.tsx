@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'motion';
 import GlassNavbar from './GlassNavbar';
 import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
 import { DodoPayments } from 'dodopayments-checkout';
@@ -23,10 +23,12 @@ const CheckoutSection = () => {
     });
 
     // 2. Abrir el checkout en el contenedor especificado
+    /* 
     DodoPayments.Checkout.open({
       checkoutUrl: CHECKOUT_URL,
       elementId: 'dodo-inline-checkout'
     });
+    */
 
     // 3. Limpieza al desmontar el componente (Obligatorio)
     return () => DodoPayments.Checkout.close();
@@ -174,9 +176,11 @@ export default function App() {
     }
   };
 
+  /*
   if (currentPath === '/success') {
     return <Success />;
   }
+  */
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased relative">
@@ -601,7 +605,7 @@ export default function App() {
           <h3 className="text-2xl font-semibold mb-2 text-gray-900">Get NauticPlayer now.</h3>
           <p className="text-gray-500 mb-8 max-w-md mx-auto">One-time payment. Lifetime access with all features included.</p>
           
-          <CheckoutSection />
+          {/* <CheckoutSection /> */}
 
           <div className="mt-12">
             <a id="download" href="#" className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group scroll-mt-48">

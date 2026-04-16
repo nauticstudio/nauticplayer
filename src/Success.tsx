@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'motion';
 import { CheckCircle2, FileText, House } from 'lucide-react';
 
 const Success = () => {
