@@ -4,7 +4,7 @@ import GlassNavbar from './GlassNavbar';
 import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
 import Success from './Success';
 
-const CHECKOUT_URL = 'https://test.checkout.dodopayments.com/buy/pdt_0NcmjeEtMuaKtasTFEYhA?quantity=1&redirect_url=https://nauticstudio.xyz%2Fsuccess&showDiscounts=false';
+const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcpwUcEKDlGXQ0lLKzSZ?quantity=1&redirect_url=https://nauticboy.xyz%2Fsuccess';
 
 
 
