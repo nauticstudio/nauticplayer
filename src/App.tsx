@@ -10,10 +10,12 @@ const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcmjeEtMuaKtasT
 const CheckoutSection = () => {
   useEffect(() => {
     // 1. Inicializar SDK en modo Live con displayType inline
+    console.log('Iniciando Dodo Payments SDK...');
     DodoPayments.Initialize({
       mode: 'live',
       displayType: 'inline',
       onEvent: (event) => {
+        console.log('Dodo Event:', event.event_type);
         if (event.event_type === 'checkout.pay_button_clicked') {
           console.log('Procesando pago...');
         }
@@ -160,6 +162,18 @@ export default function App() {
   const [activeItem, setActiveItem] = useState<string>('');
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
+  const scrollToBuy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById('buy');
+    if (element) {
+      console.log('Scrolling to buy section...');
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActiveItem('Buy');
+    } else {
+      console.error('No se encontró la sección #buy');
+    }
+  };
+
   if (currentPath === '/success') {
     return <Success />;
   }
@@ -222,11 +236,7 @@ export default function App() {
             </a>
             <a 
               href="#buy" 
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector('#buy')?.scrollIntoView({ behavior: 'smooth' });
-                setActiveItem('Buy');
-              }}
+              onClick={scrollToBuy}
               className="relative inline-flex items-center justify-center px-8 py-3.5 bg-[#ff6213] rounded-[20px] text-white font-medium text-[16px] transition-all duration-300 hover:shadow-[0_8px_25px_-6px_rgba(255,98,19,0.5)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group shadow-[0_4px_15px_-4px_rgba(255,98,19,0.4)]"
             >
               <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-[#e55005] to-[#ff7d3a] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
