@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion';
+import { motion, AnimatePresence } from 'motion/react';
 import GlassNavbar from './GlassNavbar';
 import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
 import { DodoPayments } from 'dodopayments-checkout';
