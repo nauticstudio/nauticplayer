@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="https://via.placeholder.com/800x200/0F172A/38BDF8?text=NauticPlayer+Web+Experience" alt="NauticPlayer Banner" width="100%" />
+  <img src="https://images.unsplash.com/photo-1516280440502-869542a6c661?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Nautic Studio Audio Setup" width="100%" style="border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.5);" />
 
   <br />
   <br />
 
-  # 🎧 NauticPlayer Web
+  # 🎧 NauticPlayer Web Ecosystem
   
-  **La experiencia definitiva para la reproducción de audio profesional y automatizada.**
+  **The definitive platform for professional, automated audio playback and secure licensing.**
   
   [![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
   [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
@@ -14,31 +14,32 @@
   [![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
 
   <p align="center">
-    <a href="#sparkles-características">Características</a> •
-    <a href="#rocket-arranque-rápido">Arranque Rápido</a> •
-    <a href="#gear-configuración">Configuración</a> •
-    <a href="#globe_with_meridians-despliegue">Despliegue</a>
+    <a href="#sparkles-core-features">Features</a> •
+    <a href="#rocket-quick-start">Quick Start</a> •
+    <a href="#gear-configuration">Configuration</a> •
+    <a href="#lock_with_ink_pen-security-architecture">Security</a> •
+    <a href="#globe_with_meridians-deployment">Deployment</a>
   </p>
 </div>
 
 ---
 
-## :sparkles: Características Principales
+## :sparkles: Core Features
 
-Diseñado con un enfoque minimalista y un motor de audio de alto rendimiento, este repositorio contiene la interfaz web oficial de **NauticPlayer**.
+Designed with a minimalist approach and a high-performance audio engine, this repository hosts the official web interface and the secure proxy API for **NauticPlayer**.
 
-- **Interfaz Minimalista:** UI diseñada meticulosamente para evitar distracciones y maximizar el flujo de trabajo del DJ/Productor.
-- **Integración Fluida:** Conexión nativa y segura con nuestros sistemas de validación y licencias.
-- **Rendimiento Extremo:** Construido sobre la arquitectura de Server-Side Rendering (SSR) para tiempos de carga casi instantáneos.
-- **Responsive Design:** Experiencia visual perfecta tanto en monitores ultra-wide de estudio como en dispositivos móviles.
+- **Distraction-Free UI:** Meticulously designed interface to eliminate distractions and maximize the DJ/Producer's workflow.
+- **Hardware-Locked Licensing:** Seamless, bank-grade integration with Dodo Payments, utilizing machine UUIDs to prevent unauthorized license sharing.
+- **Extreme Performance:** Built on Server-Side Rendering (SSR) architecture for near-instant load times.
+- **Responsive Design:** A flawless visual experience whether you are on an ultra-wide studio monitor or a mobile device.
 
 ---
 
-## :rocket: Arranque Rápido
+## :rocket: Quick Start
 
-Sigue estos pasos para levantar el entorno de desarrollo en tu máquina local en menos de 2 minutos.
+Follow these steps to get the development environment running on your local machine in under 2 minutes.
 
-### 1. Clonar el repositorio
+### 1. Clone the repository
 ```bash
-git clone [https://github.com/tu-usuario/player.nauticstudio.xyz.git](https://github.com/tu-usuario/player.nauticstudio.xyz.git)
-cd player.nauticstudio.xyz
+git clone [https://github.com/nauticsoftware/nautic-api.git](https://github.com/nauticsoftware/nautic-api.git)
+cd nautic-api
