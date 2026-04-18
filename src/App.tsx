@@ -5,7 +5,7 @@ import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
 import Success from './Success';
 
 const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcpwUcEKDlGXQ0lLKzSZ?quantity=1&redirect_url=https://nauticboy.xyz%2Fsuccess';
-const DMG_URL = 'https://github.com/nauticsoftware/NauticPlayer-Releases/releases/download/v1.0/NauticPlayer-1.0.dmg';
+const DMG_URL = 'https://github.com/nauticsoftware/NauticPlayer-Releases/releases/download/v1.0.0/NauticPlayer_v1.0.dmg';
 
 
 
@@ -178,7 +178,7 @@ export default function App() {
           <NavItem label="Buy" icon={ShoppingCart} href="#buy" activeItem={activeItem} setActiveItem={setActiveItem} className="flex-1 max-w-[80px]" layoutIdPrefix="nav" />
           <a
             href={DMG_URL}
-            download="NauticPlayer-1.0.dmg"
+            download="NauticPlayer_v1.0.dmg"
             onClick={() => setActiveItem('Download')}
             className={`relative flex flex-col items-center justify-center text-center cursor-pointer transition-colors duration-300 no-underline hover:no-underline group h-full flex-1 max-w-[80px] ${
               activeItem === 'Download' ? 'text-[#ff6213]' : 'text-[#2a2c22]'
@@ -205,7 +205,7 @@ export default function App() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-12">
             <a
               href={DMG_URL}
-              download="NauticPlayer-1.0.dmg"
+              download="NauticPlayer_v1.0.dmg"
               className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group"
             >
               <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -594,7 +594,7 @@ export default function App() {
             <a
               id="download"
               href={DMG_URL}
-              download="NauticPlayer-1.0.dmg"
+              download="NauticPlayer_v1.0.dmg"
               className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group scroll-mt-48"
             >
               <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
