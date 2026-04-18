@@ -5,6 +5,7 @@ import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
 import Success from './Success';
 
 const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcpwUcEKDlGXQ0lLKzSZ?quantity=1&redirect_url=https://nauticboy.xyz%2Fsuccess';
+const DMG_URL = 'https://github.com/nauticsoftware/NauticPlayer-Releases/releases/download/v1.0/NauticPlayer-1.0.dmg';
 
 
 
@@ -175,7 +176,20 @@ export default function App() {
           </div>
 
           <NavItem label="Buy" icon={ShoppingCart} href="#buy" activeItem={activeItem} setActiveItem={setActiveItem} className="flex-1 max-w-[80px]" layoutIdPrefix="nav" />
-          <NavItem label="Download" icon={Download} href="#download" activeItem={activeItem} setActiveItem={setActiveItem} className="flex-1 max-w-[80px]" layoutIdPrefix="nav" />
+          <a
+            href={DMG_URL}
+            download="NauticPlayer-1.0.dmg"
+            onClick={() => setActiveItem('Download')}
+            className={`relative flex flex-col items-center justify-center text-center cursor-pointer transition-colors duration-300 no-underline hover:no-underline group h-full flex-1 max-w-[80px] ${
+              activeItem === 'Download' ? 'text-[#ff6213]' : 'text-[#2a2c22]'
+            } py-0`}
+            style={{ filter: activeItem === 'Download' ? 'none' : 'drop-shadow(0px 0px 3px rgba(255,255,255,0.9)) drop-shadow(0px 0px 8px rgba(255,255,255,1))' }}
+          >
+            <Download className={`h-[24px] w-[24px] mb-0.5 sm:mb-1 transition-transform duration-250 ease-out group-hover:scale-110 group-active:scale-95 ${
+              activeItem === 'Download' ? 'stroke-[#ff6213]' : 'stroke-[#2a2c22]'
+            }`} />
+            <span className="relative z-10 text-[11px] sm:text-[14px] font-medium text-center leading-tight">Download</span>
+          </a>
         </div>
       </GlassNavbar>
 
@@ -189,9 +203,13 @@ export default function App() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-12">
-            <a href="#" className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group">
+            <a
+              href={DMG_URL}
+              download="NauticPlayer-1.0.dmg"
+              className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group"
+            >
               <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              Download Free Trial
+              Download
               <svg className="ml-2.5 w-4 h-4 text-gray-600 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
               </svg>
@@ -573,9 +591,14 @@ export default function App() {
           </div>
 
           <div className="mt-12">
-            <a id="download" href="#" className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group scroll-mt-48">
+            <a
+              id="download"
+              href={DMG_URL}
+              download="NauticPlayer-1.0.dmg"
+              className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group scroll-mt-48"
+            >
               <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              Download Free Trial
+              Download
               <svg className="ml-2.5 w-4 h-4 text-gray-600 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
               </svg>
