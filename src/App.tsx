@@ -127,25 +127,27 @@ export default function App() {
       </div>
 
       {/* Top Bar Minimalista */}
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-6 flex items-center justify-between pointer-events-none">
-        {/* Logo + Nombre */}
-        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setActiveItem(''); }} className="pointer-events-auto flex items-center gap-3 no-underline group transition-transform hover:scale-[1.02] active:scale-[0.98]">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[12px] flex items-center justify-center overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.08)] bg-white border border-gray-200/50">
-            <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
-          </div>
-          <span className="font-semibold text-[18px] sm:text-[20px] text-gray-900 tracking-tight hidden sm:block">
-            NauticPlayer <span className="text-gray-500 font-normal">for Mac</span>
-          </span>
-        </a>
+      <header className="fixed top-0 left-0 right-0 z-50 py-7 pointer-events-none">
+        <div className="max-w-5xl mx-auto px-6 flex items-center justify-between">
+          {/* Logo + Nombre */}
+          <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setActiveItem(''); }} className="pointer-events-auto flex items-center gap-3 no-underline group transition-transform hover:scale-[1.02] active:scale-[0.98]">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-[14px] flex items-center justify-center overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.08)] bg-white border border-gray-200/50">
+              <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
+            </div>
+            <span className="font-semibold text-[20px] sm:text-[22px] text-gray-900 tracking-tight hidden sm:block">
+              NauticPlayer <span className="text-gray-500 font-normal">for Mac</span>
+            </span>
+          </a>
 
-        {/* Botón Download */}
-        <a 
-          href="#buy"
-          onClick={handleBuyClick}
-          className="pointer-events-auto flex items-center justify-center px-6 py-2.5 rounded-full border border-[#ff6213]/40 bg-white/50 backdrop-blur-md text-[14px] font-medium text-gray-800 transition-all hover:bg-[#ff6213] hover:border-[#ff6213] hover:text-white hover:shadow-[0_4px_20px_-4px_rgba(255,98,19,0.5)] active:scale-95"
-        >
-          Download — $19.99
-        </a>
+          {/* Botón Download */}
+          <a 
+            href="#buy"
+            onClick={handleBuyClick}
+            className="pointer-events-auto flex items-center justify-center px-7 py-3 rounded-full border border-[#ff6213]/40 bg-white/50 backdrop-blur-md text-[15px] font-medium text-gray-800 transition-all hover:bg-[#ff6213] hover:border-[#ff6213] hover:text-white hover:shadow-[0_4px_20px_-4px_rgba(255,98,19,0.5)] active:scale-95"
+          >
+            Download — $19.99
+          </a>
+        </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-4 pt-24 sm:pt-32 pb-32 sm:pb-24">
