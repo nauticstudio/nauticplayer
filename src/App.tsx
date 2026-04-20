@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Success from './Success';
 
 const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcpwUcEKDlGXQ0lLKzSZ?quantity=1&redirect_url=https://nauticboy.xyz%2Fsuccess';
-const DMG_URL = 'https://github.com/nauticsoftware/NauticPlayer-Releases/releases/download/v1.0.0/NauticPlayer_v1.0.dmg';
+const DMG_URL = 'https://github.com/nauticsoftware/NauticPlayer-Releases/releases/download/v1.1/NauticPlayer_v1.1.dmg';
 
 
 
@@ -110,14 +110,12 @@ export default function App() {
     <div className="min-h-screen bg-white font-sans antialiased relative" data-version="restoration-v3-stable">
 
 
-
-
       {/* Top Bar Minimalista */}
       <header className="fixed top-0 left-0 right-0 z-50 py-7 pointer-events-none">
         <div className="max-w-5xl mx-auto px-6 flex items-center justify-between">
           {/* Logo + Nombre */}
           <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="pointer-events-auto flex items-center gap-3 no-underline group transition-transform hover:scale-[1.02] active:scale-[0.98]">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-[14px] flex items-center justify-center overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.08)] bg-white border border-gray-200/50">
+            <div className="w-12 h-12 sm:w-14 h-14 rounded-[14px] flex items-center justify-center overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.08)] bg-white border border-gray-200/50">
               <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
             </div>
             <span className="font-semibold text-[20px] sm:text-[22px] text-gray-900 tracking-tight hidden sm:block">
@@ -146,7 +144,6 @@ export default function App() {
           </p>
 
 
-
           <ThemeShowcase />
 
         </section>
@@ -154,7 +151,7 @@ export default function App() {
         {/* Section 2: Eficiencia */}
         <section id="features" className="mb-20 text-center scroll-mt-32">
 
-          <h2 className="text-2xl md:text-[28px] font-semibold mb-4 text-gray-900">Zero CPU spikes. Maximum performance.</h2>
+          <h2 className="text-2xl md:text-[28px] font-semibold mb-4 text-gray-900">Featherweight on your Mac. Heavyweight on Sound.</h2>
           <p className="text-[17px] text-gray-700 mb-10 leading-relaxed max-w-4xl mx-auto">
             Say goodbye to bloated Electron apps. Built natively on Apple's AVAudioEngine for zero CPU spikes, maximum battery life, and control right from your menu bar.
           </p>
@@ -504,7 +501,7 @@ export default function App() {
           <div className="w-16 h-16 mx-auto rounded-[16px] flex items-center justify-center mb-8 overflow-hidden shadow-md border border-black/5 bg-white">
             <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
           </div>
-          
+
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">Pay once. Own it forever.</h2>
           <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
             Most players charge $9.99/month. That's $240 over two years — for software you're just renting. <span className="text-gray-900 font-semibold">NauticPlayer is $19.99. Once.</span>
@@ -512,45 +509,45 @@ export default function App() {
 
           {/* Visual Comparison Card */}
           <div className="max-w-md mx-auto mb-16 bg-gray-50/50 rounded-3xl border border-gray-200/50 p-8 shadow-sm">
-             <div className="grid grid-cols-2 gap-8 text-left">
-                <div>
-                  <span className="text-[12px] font-bold uppercase tracking-wider text-gray-400 block mb-4">NauticPlayer</span>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Year 1</span>
-                      <span className="font-semibold text-gray-900">$19.99</span>
-                    </div>
-                    <div className="flex justify-between items-center text-blue-600 font-medium">
-                      <span>Year 2+</span>
-                      <span>$0.00</span>
-                    </div>
-                    <div className="pt-3 border-t border-gray-200 flex justify-between items-center">
-                      <span className="font-bold text-gray-900">Total</span>
-                      <span className="font-bold text-gray-900">$19.99</span>
-                    </div>
+            <div className="grid grid-cols-2 gap-8 text-left">
+              <div>
+                <span className="text-[12px] font-bold uppercase tracking-wider text-gray-400 block mb-4">NauticPlayer</span>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-600">Year 1</span>
+                    <span className="font-semibold text-gray-900">$19.99</span>
+                  </div>
+                  <div className="flex justify-between items-center text-blue-600 font-medium">
+                    <span>Year 2+</span>
+                    <span>$0.00</span>
+                  </div>
+                  <div className="pt-3 border-t border-gray-200 flex justify-between items-center">
+                    <span className="font-bold text-gray-900">Total</span>
+                    <span className="font-bold text-gray-900">$19.99</span>
                   </div>
                 </div>
-                <div className="opacity-50">
-                   <span className="text-[12px] font-bold uppercase tracking-wider text-gray-400 block mb-4">Typical Subscription</span>
-                   <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-600">Year 1</span>
-                      <span>$119.88</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span>Year 2+</span>
-                      <span>$239.76</span>
-                    </div>
-                    <div className="pt-3 border-t border-gray-200 flex justify-between items-center">
-                      <span className="font-medium text-gray-900">Total</span>
-                      <span className="font-medium text-gray-900">$359.64</span>
-                    </div>
+              </div>
+              <div className="opacity-50">
+                <span className="text-[12px] font-bold uppercase tracking-wider text-gray-400 block mb-4">Typical Subscription</span>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-600">Year 1</span>
+                    <span>$119.88</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Year 2+</span>
+                    <span>$239.76</span>
+                  </div>
+                  <div className="pt-3 border-t border-gray-200 flex justify-between items-center">
+                    <span className="font-medium text-gray-900">Total</span>
+                    <span className="font-medium text-gray-900">$359.64</span>
                   </div>
                 </div>
-             </div>
-             <div className="mt-6 pt-6 border-t border-gray-200 text-sm text-gray-500 font-medium italic">
-                ✓ You own it · ✗ Renting forever
-             </div>
+              </div>
+            </div>
+            <div className="mt-6 pt-6 border-t border-gray-200 text-sm text-gray-500 font-medium italic">
+              ✓ You own it · ✗ Renting forever
+            </div>
           </div>
 
           <div className="flex flex-col items-center gap-6">
@@ -560,7 +557,7 @@ export default function App() {
             >
               Buy Now — $19.99 · One-Time
             </button>
-            
+
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[14px] text-gray-500 font-medium">
               <span className="flex items-center gap-2"><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>No subscription, ever</span>
               <span className="flex items-center gap-2"><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>All future updates included</span>
@@ -571,7 +568,7 @@ export default function App() {
               <a
                 id="download"
                 href={DMG_URL}
-                download="NauticPlayer_v1.0.dmg"
+                download="NauticPlayer_v1.1.dmg"
                 className="text-gray-500 hover:text-gray-900 font-medium text-[15px] transition-colors border-b border-transparent hover:border-gray-900 pb-0.5"
               >
                 Try free first — no credit card needed
