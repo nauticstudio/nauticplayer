@@ -142,7 +142,7 @@ export default function App() {
         <a 
           href="#buy"
           onClick={handleBuyClick}
-          className="pointer-events-auto flex items-center justify-center px-6 py-2.5 rounded-full border border-gray-300 bg-white/50 backdrop-blur-md text-[14px] font-medium text-gray-800 transition-all hover:bg-white hover:border-gray-400 hover:shadow-sm active:scale-95"
+          className="pointer-events-auto flex items-center justify-center px-6 py-2.5 rounded-full border border-[#ff6213]/40 bg-white/50 backdrop-blur-md text-[14px] font-medium text-gray-800 transition-all hover:bg-[#ff6213] hover:border-[#ff6213] hover:text-white hover:shadow-[0_4px_20px_-4px_rgba(255,98,19,0.5)] active:scale-95"
         >
           Download — $19.99
         </a>
@@ -152,36 +152,12 @@ export default function App() {
         {/* Hero Section */}
         <section className="text-center mb-24">
           <h1 className="text-4xl md:text-[2.75rem] font-bold tracking-tight mb-2 text-gray-900">NauticPlayer</h1>
-          <h2 className="text-xl md:text-2xl text-gray-600 mb-8 font-normal">Pro Audio. Zero Clutter.</h2>
-          <p className="text-[17px] text-gray-700 max-w-2xl mx-auto leading-relaxed mb-8">
+          <h2 className="text-xl md:text-2xl text-gray-600 mb-8 font-normal">Your most minimalist player.</h2>
+          <p className="text-[17px] text-gray-700 max-w-2xl mx-auto leading-relaxed mb-12">
             Experience lossless audio with DJ-grade Automixing. Built natively for macOS to deliver lightning-fast performance without draining your battery.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-12">
-            <a
-              href={DMG_URL}
-              download="NauticPlayer_v1.0.dmg"
-              className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group"
-            >
-              <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              Download
-              <svg className="ml-2.5 w-4 h-4 text-gray-600 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-              </svg>
-            </a>
-            <a 
-              href="#buy" 
-              onClick={handleBuyClick}
-              className="relative inline-flex items-center justify-center px-8 py-3.5 bg-[#ff6213] rounded-[20px] text-white font-medium text-[16px] transition-all duration-300 hover:shadow-[0_8px_25px_-6px_rgba(255,98,19,0.5)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group shadow-[0_4px_15px_-4px_rgba(255,98,19,0.4)]"
-            >
-              <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-[#e55005] to-[#ff7d3a] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] skew-x-[30deg] transition-all duration-700 ease-out group-hover:translate-x-[150%]"></span>
-              Buy Now - $19.99
-              <svg className="ml-2.5 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </a>
-          </div>
+
           
           <ThemeShowcase />
 
