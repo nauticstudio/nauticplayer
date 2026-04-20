@@ -493,35 +493,90 @@ export default function App() {
           </div>
         </section>
 
-        <section id="buy" className="text-center pt-8 border-t border-gray-100 scroll-mt-32">
-          <div className="w-12 h-12 mx-auto rounded-[12px] flex items-center justify-center mb-6 overflow-hidden shadow-sm border border-black/5">
+        {/* Bridge Section */}
+        <section className="text-center mb-16 px-4">
+          <p className="text-xl md:text-2xl text-gray-500 max-w-2xl mx-auto font-light leading-relaxed">
+            The industry charges you every month for software you'll never truly own. <span className="text-gray-900 font-medium">We think that's backwards.</span>
+          </p>
+        </section>
+
+        <section id="buy" className="text-center pt-16 border-t border-gray-100 scroll-mt-32 pb-24">
+          <div className="w-16 h-16 mx-auto rounded-[16px] flex items-center justify-center mb-8 overflow-hidden shadow-md border border-black/5 bg-white">
             <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
           </div>
-          <h3 className="text-2xl font-semibold mb-2 text-gray-900">Get NauticPlayer now.</h3>
-          <p className="text-gray-500 mb-8 max-w-md mx-auto">One-time payment. Lifetime access with all features included.</p>
+          
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">Pay once. Own it forever.</h2>
+          <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+            Most players charge $9.99/month. That's $240 over two years — for software you're just renting. <span className="text-gray-900 font-semibold">NauticPlayer is $19.99. Once.</span>
+          </p>
 
-          <div className="flex justify-center">
-            <button
-              onClick={handleBuyClick}
-              className="px-12 py-4 bg-[#ff6213] rounded-[20px] text-white font-semibold text-lg hover:shadow-[0_8px_25px_rgba(255,98,19,0.5)] transition-all hover:-translate-y-1"
-            >
-              Buy Now - $19.99
-            </button>
+          {/* Visual Comparison Card */}
+          <div className="max-w-md mx-auto mb-16 bg-gray-50/50 rounded-3xl border border-gray-200/50 p-8 shadow-sm">
+             <div className="grid grid-cols-2 gap-8 text-left">
+                <div>
+                  <span className="text-[12px] font-bold uppercase tracking-wider text-gray-400 block mb-4">NauticPlayer</span>
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Year 1</span>
+                      <span className="font-semibold text-gray-900">$19.99</span>
+                    </div>
+                    <div className="flex justify-between items-center text-blue-600 font-medium">
+                      <span>Year 2+</span>
+                      <span>$0.00</span>
+                    </div>
+                    <div className="pt-3 border-t border-gray-200 flex justify-between items-center">
+                      <span className="font-bold text-gray-900">Total</span>
+                      <span className="font-bold text-gray-900">$19.99</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="opacity-50">
+                   <span className="text-[12px] font-bold uppercase tracking-wider text-gray-400 block mb-4">Typical Subscription</span>
+                   <div className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-600">Year 1</span>
+                      <span>$119.88</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span>Year 2+</span>
+                      <span>$239.76</span>
+                    </div>
+                    <div className="pt-3 border-t border-gray-200 flex justify-between items-center">
+                      <span className="font-medium text-gray-900">Total</span>
+                      <span className="font-medium text-gray-900">$359.64</span>
+                    </div>
+                  </div>
+                </div>
+             </div>
+             <div className="mt-6 pt-6 border-t border-gray-200 text-sm text-gray-500 font-medium italic">
+                ✓ You own it · ✗ Renting forever
+             </div>
           </div>
 
-          <div className="mt-12">
-            <a
-              id="download"
-              href={DMG_URL}
-              download="NauticPlayer_v1.0.dmg"
-              className="relative inline-flex items-center justify-center px-8 py-3.5 bg-white border border-gray-200/80 rounded-[20px] text-gray-900 font-medium text-[16px] transition-all duration-300 hover:border-gray-300 hover:shadow-[0_8px_20px_-6px_rgba(0,0,0,0.1)] hover:-translate-y-0.5 active:translate-y-0 overflow-hidden group scroll-mt-48"
+          <div className="flex flex-col items-center gap-6">
+            <button
+              onClick={handleBuyClick}
+              className="px-14 py-5 bg-[#ff6213] rounded-[24px] text-white font-bold text-xl shadow-[0_10px_30px_-5px_rgba(255,98,19,0.4)] hover:shadow-[0_15px_35px_-5px_rgba(255,98,19,0.5)] transition-all hover:-translate-y-1 active:translate-y-0"
             >
-              <span className="absolute inset-0 w-full h-full -z-10 bg-gradient-to-tr from-gray-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              Download
-              <svg className="ml-2.5 w-4 h-4 text-gray-600 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-              </svg>
-            </a>
+              Buy Now — $19.99 · One-Time
+            </button>
+            
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[14px] text-gray-500 font-medium">
+              <span className="flex items-center gap-2"><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>No subscription, ever</span>
+              <span className="flex items-center gap-2"><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>All future updates included</span>
+              <span className="flex items-center gap-2"><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>One license, one Mac</span>
+            </div>
+
+            <div className="mt-12">
+              <a
+                id="download"
+                href={DMG_URL}
+                download="NauticPlayer_v1.0.dmg"
+                className="text-gray-500 hover:text-gray-900 font-medium text-[15px] transition-colors border-b border-transparent hover:border-gray-900 pb-0.5"
+              >
+                Try free first — no credit card needed
+              </a>
+            </div>
           </div>
         </section>
       </main>
