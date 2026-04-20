@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import GlassNavbar from './GlassNavbar';
-import { Sparkles, LifeBuoy, ShoppingCart, Download, Home } from 'lucide-react';
+
 import Success from './Success';
 
 const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcpwUcEKDlGXQ0lLKzSZ?quantity=1&redirect_url=https://nauticboy.xyz%2Fsuccess';
@@ -80,41 +79,7 @@ const ThemeShowcase = ({ lightImage = "/captures/player-wt.webp", darkImage = "/
   );
 }
 
-const NavItem = ({ label, icon: Icon, activeItem, setActiveItem, href = "#", className = "", layoutIdPrefix = "nav" }: { label: string, icon: any, activeItem: string, setActiveItem: (val: string) => void, href?: string, className?: string, layoutIdPrefix?: string }) => {
-  const isActive = activeItem === label;
-  return (
-    <a
-      href={href}
-      onClick={(e) => {
-        setActiveItem(label);
-        if (href.startsWith('#') && href !== '#') {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      }}
-      className={`relative flex flex-col items-center justify-center text-center cursor-pointer transition-colors duration-300 no-underline hover:no-underline group h-full ${isActive ? 'text-[#ff6213]' : 'text-[#2a2c22]'} py-0 ${className}`}
-      style={{ filter: isActive ? 'none' : 'drop-shadow(0px 0px 3px rgba(255,255,255,0.9)) drop-shadow(0px 0px 8px rgba(255,255,255,1))' }}
-    >
-      <AnimatePresence>
-        {isActive && (
-          <motion.div
-            layoutId={`${layoutIdPrefix}-activeBubble`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] sm:w-[95%] h-[75%] sm:h-[85%] bg-black/[0.08] rounded-xl sm:rounded-2xl -z-10"
-            transition={{ type: "spring", stiffness: 350, damping: 30, opacity: { duration: 0.2 } }}
-          />
-        )}
-      </AnimatePresence>
-      <Icon className={`h-[24px] w-[24px] mb-0.5 sm:mb-1 transition-transform duration-250 ease-out group-hover:scale-110 group-active:scale-95 ${isActive ? 'stroke-[#ff6213]' : 'stroke-[#2a2c22]'}`} />
-      <span className="relative z-10 text-[11px] sm:text-[14px] font-medium text-center leading-tight">{label}</span>
-    </a>
-  );
-};
+
 
 
 const GlassCard = ({ children, className = "", rounded = "rounded-[2rem]" }: any) => (
@@ -161,39 +126,29 @@ export default function App() {
         <div className="absolute inset-0 bg-white/60 backdrop-blur-[50px]"></div>
       </div>
 
-      {/* Header Container */}
-      <GlassNavbar>
-        <div className="flex flex-1 items-center justify-between w-full h-full px-4 sm:px-10 m-0">
-          <NavItem label="Back to Studio" icon={() => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>} href="https://nauticstudio.xyz" activeItem={activeItem} setActiveItem={setActiveItem} className="flex-1 max-w-[120px]" layoutIdPrefix="nav" />
-          <NavItem label="Features" icon={Sparkles} href="#features" activeItem={activeItem} setActiveItem={setActiveItem} className="flex-1 max-w-[80px] hidden sm:flex" layoutIdPrefix="nav" />
-          
-          <div className="flex items-center justify-center z-40 flex-1 max-w-[100px]">
-            <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setActiveItem(''); }} className="flex items-center justify-center transition-transform hover:scale-105 active:scale-95" aria-label="Volver al inicio">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[12px] flex items-center justify-center shadow-sm overflow-hidden border border-black/5 bg-white/50 backdrop-blur-md">
-                <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-8 h-8 sm:w-10 sm:h-10 object-cover" />
-              </div>
-            </a>
+      {/* Top Bar Minimalista */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-6 flex items-center justify-between pointer-events-none">
+        {/* Logo + Nombre */}
+        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setActiveItem(''); }} className="pointer-events-auto flex items-center gap-3 no-underline group transition-transform hover:scale-[1.02] active:scale-[0.98]">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[12px] flex items-center justify-center overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.08)] bg-white border border-gray-200/50">
+            <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
           </div>
+          <span className="font-semibold text-[18px] sm:text-[20px] text-gray-900 tracking-tight hidden sm:block">
+            NauticPlayer <span className="text-gray-500 font-normal">for Mac</span>
+          </span>
+        </a>
 
-          <NavItem label="Buy" icon={ShoppingCart} href="#buy" activeItem={activeItem} setActiveItem={setActiveItem} className="flex-1 max-w-[80px]" layoutIdPrefix="nav" />
-          <a
-            href={DMG_URL}
-            download="NauticPlayer_v1.0.dmg"
-            onClick={() => setActiveItem('Download')}
-            className={`relative flex flex-col items-center justify-center text-center cursor-pointer transition-colors duration-300 no-underline hover:no-underline group h-full flex-1 max-w-[80px] ${
-              activeItem === 'Download' ? 'text-[#ff6213]' : 'text-[#2a2c22]'
-            } py-0`}
-            style={{ filter: activeItem === 'Download' ? 'none' : 'drop-shadow(0px 0px 3px rgba(255,255,255,0.9)) drop-shadow(0px 0px 8px rgba(255,255,255,1))' }}
-          >
-            <Download className={`h-[24px] w-[24px] mb-0.5 sm:mb-1 transition-transform duration-250 ease-out group-hover:scale-110 group-active:scale-95 ${
-              activeItem === 'Download' ? 'stroke-[#ff6213]' : 'stroke-[#2a2c22]'
-            }`} />
-            <span className="relative z-10 text-[11px] sm:text-[14px] font-medium text-center leading-tight">Download</span>
-          </a>
-        </div>
-      </GlassNavbar>
+        {/* Botón Download */}
+        <a 
+          href="#buy"
+          onClick={handleBuyClick}
+          className="pointer-events-auto flex items-center justify-center px-6 py-2.5 rounded-full border border-gray-300 bg-white/50 backdrop-blur-md text-[14px] font-medium text-gray-800 transition-all hover:bg-white hover:border-gray-400 hover:shadow-sm active:scale-95"
+        >
+          Download — $19.99
+        </a>
+      </header>
 
-      <main className="max-w-4xl mx-auto px-4 pt-12 sm:pt-32 pb-32 sm:pb-24">
+      <main className="max-w-4xl mx-auto px-4 pt-24 sm:pt-32 pb-32 sm:pb-24">
         {/* Hero Section */}
         <section className="text-center mb-24">
           <h1 className="text-4xl md:text-[2.75rem] font-bold tracking-tight mb-2 text-gray-900">NauticPlayer</h1>
