@@ -137,8 +137,10 @@ export default function App() {
       <main className="max-w-4xl mx-auto px-4 pt-24 sm:pt-32 pb-32 sm:pb-24">
         {/* Hero Section */}
         <section className="text-center mb-24">
-          <h1 className="text-4xl md:text-[2.75rem] font-bold tracking-tight mb-2 text-gray-900">NauticPlayer</h1>
-          <h2 className="text-xl md:text-2xl text-gray-600 mb-8 font-normal">Your most minimalist player.</h2>
+          <h1 className="text-6xl md:text-[5rem] font-extrabold tracking-tight mb-4 inline-block">
+            <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">NauticPlayer</span>
+          </h1>
+          <h2 className="text-xl md:text-[26px] text-gray-600 mb-8 font-normal tracking-tight">Your most minimalist player.</h2>
           <p className="text-[17px] text-gray-700 max-w-2xl mx-auto leading-relaxed mb-12">
             Experience lossless audio with DJ-grade Automixing. Built natively for macOS to deliver lightning-fast performance without draining your battery.
           </p>
@@ -151,26 +153,29 @@ export default function App() {
         {/* Section 2: Eficiencia */}
         <section id="features" className="mb-20 text-center scroll-mt-32">
 
-          <h2 className="text-2xl md:text-[28px] font-semibold mb-4 text-gray-900">Featherweight on your Mac. Heavyweight on Sound.</h2>
-          <p className="text-[17px] text-gray-700 mb-10 leading-relaxed max-w-4xl mx-auto">
-            Say goodbye to bloated Electron apps. Built natively on Apple's AVAudioEngine for zero CPU spikes, maximum battery life, and control right from your menu bar.
+          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 inline-block">
+            <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">Harmonic Mixing. </span>
+            <span className="text-gray-900">Always in Key.</span>
+          </h2>
+          <p className="text-[19px] md:text-[21px] text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto font-light">
+            Instantly read your tracks' metadata to display accurate BPM and musical keys. Switch seamlessly between traditional Classical notation and the Camelot Wheel to ensure your mixes are always harmonically perfect.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-b from-white to-gray-50/50 border border-gray-200/80 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] text-[14px] font-medium text-gray-700 tracking-wide select-none cursor-default">
               <span className="w-1.5 h-1.5 rounded-full bg-[#ff6213] shadow-[0_0_6px_rgba(255,98,19,0.6)]"></span>
-              AVAudioEngine
+              Camelot Wheel
             </span>
             <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-b from-white to-gray-50/50 border border-gray-200/80 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] text-[14px] font-medium text-gray-700 tracking-wide select-none cursor-default">
               <span className="w-1.5 h-1.5 rounded-full bg-[#ff6213] shadow-[0_0_6px_rgba(255,98,19,0.6)]"></span>
-              CPU Usage
+              Classical Notation
             </span>
             <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-b from-white to-gray-50/50 border border-gray-200/80 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] text-[14px] font-medium text-gray-700 tracking-wide select-none cursor-default">
               <span className="w-1.5 h-1.5 rounded-full bg-[#ff6213] shadow-[0_0_6px_rgba(255,98,19,0.6)]"></span>
-              Battery Life
+              Metadata ID3
             </span>
             <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-b from-white to-gray-50/50 border border-gray-200/80 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] text-[14px] font-medium text-gray-700 tracking-wide select-none cursor-default">
               <span className="w-1.5 h-1.5 rounded-full bg-[#ff6213] shadow-[0_0_6px_rgba(255,98,19,0.6)]"></span>
-              Menu Bar Waveform
+              Real-time BPM
             </span>
           </div>
           <div className="mt-14 flex justify-center w-full max-w-4xl mx-auto px-2 sm:px-4">
@@ -230,7 +235,10 @@ export default function App() {
 
         {/* Section 3: Mini Player */}
         <section className="mb-32 text-center">
-          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 text-gray-900">Your music, living in the Menu Bar.</h2>
+          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 inline-block">
+            <span className="bg-gradient-to-r from-[#ff6213] to-orange-400 bg-clip-text text-transparent">Your music, </span>
+            <span className="text-gray-900">living in the Menu Bar.</span>
+          </h2>
           <p className="text-[19px] md:text-[21px] text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto font-light">
             Why switch windows to skip a drop? NauticPlayer introduces a revolutionary interactive waveform directly inside your macOS menu bar. Hover for transport controls, or click and drag across the bar to scrub instantly. An industry-first, zero-distraction workflow.
           </p>
@@ -364,7 +372,7 @@ export default function App() {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[200%] bg-gradient-to-b from-blue-600/20 via-purple-600/10 to-transparent pointer-events-none blur-[100px]"></div>
 
             <h2 className="text-4xl md:text-[56px] font-bold tracking-tight mb-8 relative z-10 leading-tight">
-              Studio-grade fidelity. <br className="sm:hidden" /> Untouched audio.
+              <span className="bg-gradient-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent">Studio-grade fidelity.</span> <br className="sm:hidden" /> <span className="text-white">Untouched audio.</span>
             </h2>
             <p className="text-[19px] md:text-[22px] text-gray-400 leading-relaxed max-w-3xl mx-auto relative z-10 font-light">
               Your music deserves to be heard exactly as it was recorded. We bypassed the standard macOS audio stack to deliver an untouched, bit-perfect stream directly to your DAC. Support for lossless formats means you hear every single detail.
@@ -392,7 +400,10 @@ export default function App() {
           {/* Card 1 */}
           <GlassCard rounded="rounded-[2.5rem]" className="bg-gray-50/50 border border-gray-200/50 h-full">
             <div className="p-8 md:p-12 h-full flex flex-col">
-              <h3 className="text-[28px] font-bold tracking-tight mb-4 text-gray-900">Your New Sampling Workflow.</h3>
+              <h3 className="text-[28px] font-bold tracking-tight mb-4 inline-block">
+                <span className="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent">Your New</span>
+                <span className="text-gray-900"> Sampling Workflow.</span>
+              </h3>
               <p className="text-[18px] text-gray-600 leading-relaxed mb-10 font-light">
                 Seamlessly integrated with your studio. Drag any track or sample directly from NauticPlayer into Logic Pro, Ableton, or FL Studio instantly.
               </p>
@@ -427,7 +438,10 @@ export default function App() {
           {/* Card 2 */}
           <GlassCard rounded="rounded-[2.5rem]" className="bg-gray-50/50 border border-gray-200/50 h-full">
             <div className="p-8 md:p-12 h-full flex flex-col">
-              <h3 className="text-[28px] font-bold tracking-tight mb-4 text-gray-900">Keyboard-First Control.</h3>
+              <h3 className="text-[28px] font-bold tracking-tight mb-4 inline-block">
+                <span className="bg-gradient-to-r from-rose-500 to-red-500 bg-clip-text text-transparent">Keyboard-First</span>
+                <span className="text-gray-900"> Control.</span>
+              </h3>
               <p className="text-[18px] text-gray-600 leading-relaxed mb-10 font-light">
                 Never break your focus. Tag favorites with <kbd className="bg-white border border-gray-200 px-2 py-0.5 rounded shadow-sm text-sm mx-1 font-sans font-medium text-gray-700">F</kbd> or trash rejects with <kbd className="bg-white border border-gray-200 px-2 py-0.5 rounded shadow-sm text-sm mx-1 font-sans font-medium text-gray-700">Backspace</kbd> without ever touching your mouse.
               </p>
@@ -502,7 +516,10 @@ export default function App() {
             <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-gray-900">Pay once. Own it forever.</h2>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 inline-block">
+            <span className="text-gray-900">Pay once. </span>
+            <span className="bg-gradient-to-r from-[#ff6213] to-orange-500 bg-clip-text text-transparent">Own it forever.</span>
+          </h2>
           <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
             Most players charge $9.99/month. That's $240 over two years — for software you're just renting. <span className="text-gray-900 font-semibold">NauticPlayer is $19.99. Once.</span>
           </p>
