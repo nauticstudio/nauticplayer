@@ -230,9 +230,9 @@ export default function App() {
 
         {/* Section 3: Mini Player */}
         <section className="mb-32 text-center">
-          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 text-gray-900">Mighty Mini. Always in focus.</h2>
+          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 text-gray-900">Your music, living in the Menu Bar.</h2>
           <p className="text-[19px] md:text-[21px] text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto font-light">
-            A beautifully compact interface that stays out of your way. The new MiniPlayer gives you instant access to playback controls and automixing, adapting seamlessly to your macOS theme without cluttering your screen.
+            Why switch windows to skip a drop? NauticPlayer introduces a revolutionary interactive waveform directly inside your macOS menu bar. Hover for transport controls, or click and drag across the bar to scrub instantly. An industry-first, zero-distraction workflow.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <span className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-gradient-to-b from-white to-gray-50/50 border border-gray-200/80 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)] text-[14px] font-medium text-gray-700 tracking-wide select-none cursor-default">
