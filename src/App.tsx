@@ -482,13 +482,8 @@ export default function App() {
               <li>Native AVAudioEngine integration</li>
               <li>Global keyboard shortcuts support</li>
               <li>Native playback notifications</li>
-              <li>Duplicate track finder</li>
-              <li>Integrated Last.fm scrobbling</li>
-              <li>Separate playlist windows</li>
-              <li>Regex search and replace</li>
               <li>Smart playlists</li>
               <li>Detailed library statistics</li>
-              <li>AppleScript control support</li>
             </ul>
           </div>
           <div>
