@@ -34,12 +34,3 @@ Designed with a minimalist approach and a high-performance audio engine, this re
 - **Responsive Design:** A flawless visual experience whether you are on an ultra-wide studio monitor or a mobile device.
 
 ---
-
-## :rocket: Quick Start
-
-Follow these steps to get the development environment running on your local machine in under 2 minutes.
-
-### 1. Clone the repository
-```bash
-git clone [https://github.com/nauticsoftware/nautic-api.git](https://github.com/nauticsoftware/nautic-api.git)
-cd nautic-api
