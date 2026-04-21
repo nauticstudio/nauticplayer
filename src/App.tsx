@@ -481,7 +481,6 @@ export default function App() {
               <li>Real-time transient analysis</li>
               <li>Native AVAudioEngine integration</li>
               <li>Global keyboard shortcuts support</li>
-              <li>Native playback notifications</li>
               <li>Smart playlists</li>
               <li>Detailed library statistics</li>
             </ul>
