@@ -4,7 +4,7 @@
   <br />
   <br />
 
-  # 🎧 NauticPlayer Web Ecosystem
+  # 🎧 NauticPlayer Web
   
   **The definitive platform for professional, automated audio playback and secure licensing.**
   
