@@ -1,10 +1,10 @@
 import type React from 'react';
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 
 
 import Success from './Success';
 
-const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcpwUcEKDlGXQ0lLKzSZ?quantity=1&redirect_url=https://nauticboy.xyz%2Fsuccess';
+const CHECKOUT_URL = 'https://checkout.dodopayments.com/buy/pdt_0NcpwUcEKDlGXQ0lLKzSZ?quantity=1&redirect_url=https://player.nauticstudio.xyz%2Fsuccess';
 const DMG_URL = 'https://github.com/nauticsoftware/NauticPlayer-Releases/releases/download/v1.1/NauticPlayer_v1.1.dmg';
 
 
@@ -632,7 +632,7 @@ export default function App() {
       {/* Footer */}
       <footer id="support" className="max-w-4xl mx-auto px-4 py-12 border-t border-gray-200 text-[14px] text-gray-500 flex flex-col sm:flex-row items-center justify-between mt-12 scroll-mt-32">
         <div className="mb-4 sm:mb-0">
-          © 2026 NauticSoftwares. <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>
+          © 2026 Nautic Studio. <a href="https://nauticstudio.xyz/#contact" className="text-blue-600 hover:underline">Privacy Policy</a>
         </div>
         <div className="hidden sm:flex items-center justify-center">
           <div className="w-6 h-6 rounded flex items-center justify-center overflow-hidden grayscale opacity-70">
@@ -640,9 +640,9 @@ export default function App() {
           </div>
         </div>
         <div className="flex gap-6">
-          <a href="#" className="text-blue-600 hover:underline">Contact</a>
-          <a href="#" className="text-blue-600 hover:underline">Documentation</a>
-          <a href="#" className="text-blue-600 hover:underline">About</a>
+          <a href="https://nauticstudio.xyz/#contact" className="text-blue-600 hover:underline">Contact</a>
+          <a href="https://github.com/nauticsoftware/NauticPlayer-Releases" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Documentation</a>
+          <a href="https://nauticstudio.xyz/#about" className="text-blue-600 hover:underline">About</a>
         </div>
       </footer>
     </div>

@@ -26,9 +26,9 @@ const Success = () => {
           <CheckCircle2 className="w-10 h-10 text-white stroke-[2.5]" />
         </motion.div>
 
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-balance">¡Gracias por tu compra!</h1>
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4 text-balance">Thank you for your purchase!</h1>
         <p className="text-gray-400 text-lg mb-10 font-light leading-relaxed">
-          Tu <span className="text-white font-medium">License Key</span> ha sido enviada automáticamente a tu correo electrónico. Ya puedes activar NauticPlayer.
+          Your <span className="text-white font-medium">License Key</span> has been sent automatically to your email address. You can now activate NauticPlayer.
         </p>
 
         <div className="space-y-4">
@@ -38,7 +38,7 @@ const Success = () => {
             className="flex items-center justify-center gap-3 w-full py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl text-[16px] font-medium transition-[background-color,transform] duration-300 hover:-translate-y-0.5"
           >
             <FileText className="w-5 h-5 text-[#ff6213]" />
-            Manual de Instalación (PDF)
+            Installation Manual (PDF)
           </a>
 
           <a 
@@ -52,7 +52,7 @@ const Success = () => {
             }}
           >
             <House className="w-4 h-4" />
-            Volver al inicio
+            Back to Home
           </a>
         </div>
       </motion.div>
