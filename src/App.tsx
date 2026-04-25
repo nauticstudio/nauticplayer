@@ -18,11 +18,11 @@ const ThemeShowcase = ({ lightImage = "/captures/player-wt.webp", darkImage = "/
 
   const updatePosition = (percentage: number, immediate: boolean) => {
     if (overlayRef.current) {
-      overlayRef.current.style.transition = immediate ? 'none' : 'all 0.7s ease-out';
+      overlayRef.current.style.transition = immediate ? 'none' : 'clip-path 0.7s ease-out';
       overlayRef.current.style.clipPath = `polygon(0 0, ${percentage + 15}% 0, ${percentage - 15}% 100%, 0 100%)`;
     }
     if (svgRef.current) {
-      svgRef.current.style.transition = immediate ? 'none' : 'all 0.7s ease-out';
+      svgRef.current.style.transition = immediate ? 'none' : 'opacity 0.7s ease-out';
     }
     if (line1Ref.current) {
       line1Ref.current.setAttribute('x1', `${percentage + 15}%`);
@@ -43,10 +43,6 @@ const ThemeShowcase = ({ lightImage = "/captures/player-wt.webp", darkImage = "/
     updatePosition(percentage, true);
   };
 
-  const handleMouseEnter = () => {
-    // No state change needed here if we only care about mouse move
-  };
-
   const handleMouseLeave = () => {
     updatePosition(50, false);
   };
@@ -56,25 +52,28 @@ const ThemeShowcase = ({ lightImage = "/captures/player-wt.webp", darkImage = "/
       ref={containerRef}
       className={`relative w-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] border border-gray-200/30 bg-gray-50 group cursor-crosshair ${className}`}
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {/* Skin Blanca (Base) */}
       <img
         src={lightImage}
         alt="NauticPlayer Light Theme"
+        width="800"
+        height="500"
         className="w-full h-auto block select-none pointer-events-none"
       />
 
       {/* Skin Negra (Overlay con máscara diagonal) */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 select-none pointer-events-none transition-all duration-700 ease-out"
+        className="absolute inset-0 select-none pointer-events-none transition-[clip-path] duration-700 ease-out"
         style={{ clipPath: 'polygon(0 0, 65% 0, 35% 100%, 0 100%)' }}
       >
         <img
           src={darkImage}
           alt="NauticPlayer Dark Theme"
+          width="800"
+          height="500"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 shadow-[inset_-20px_0_30px_-20px_rgba(0,0,0,0.7)] mix-blend-overlay"></div>
@@ -183,7 +182,7 @@ export default function App() {
           {/* Logo + Nombre */}
           <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="pointer-events-auto flex items-center gap-3 no-underline group transition-transform hover:scale-[1.02] active:scale-[0.98]">
             <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-[14px] flex items-center justify-center overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.08)] bg-white border border-gray-200/50">
-              <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
+              <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" width="56" height="56" className="w-full h-full object-cover" />
             </div>
             <span className="font-semibold text-[20px] sm:text-[22px] text-gray-900 tracking-tight hidden sm:block">
               NauticPlayer <span className="text-gray-500 font-normal">for Mac</span>
@@ -194,7 +193,7 @@ export default function App() {
           <a
             href="#buy"
             onClick={handleBuyClick}
-            className="pointer-events-auto flex items-center justify-center px-7 py-3 rounded-full border border-[#ff6213]/40 bg-white/50 backdrop-blur-md text-[15px] font-medium text-gray-800 transition-all hover:bg-[#ff6213] hover:border-[#ff6213] hover:text-white hover:shadow-[0_4px_20px_-4px_rgba(255,98,19,0.5)] active:scale-95"
+            className="pointer-events-auto flex items-center justify-center px-7 py-3 rounded-full border border-[#ff6213]/40 bg-white/50 backdrop-blur-md text-[15px] font-medium text-gray-800 transition-[background-color,border-color,color,box-shadow,transform] hover:bg-[#ff6213] hover:border-[#ff6213] hover:text-white hover:shadow-[0_4px_20px_-4px_rgba(255,98,19,0.5)] active:scale-95"
           >
             Download — $19.99
           </a>
@@ -204,7 +203,7 @@ export default function App() {
       <main className="max-w-4xl mx-auto px-4 pt-24 sm:pt-32 pb-32 sm:pb-24">
         {/* Hero Section */}
         <section className="text-center mb-24">
-          <h1 className="text-6xl md:text-[5rem] font-extrabold tracking-tight mb-4 inline-block">
+          <h1 className="text-6xl md:text-[5rem] font-extrabold tracking-tight mb-4 inline-block text-balance">
             <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">NauticPlayer</span>
           </h1>
           <h2 className="text-xl md:text-[26px] text-gray-600 mb-8 font-normal tracking-tight">Your most minimalist player.</h2>
@@ -220,7 +219,7 @@ export default function App() {
         {/* Section 2: Eficiencia */}
         <section id="features" className="mb-20 text-center scroll-mt-32">
 
-          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 inline-block">
+          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 inline-block text-balance">
             <span className="bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">Harmonic Mixing. </span>
             <span className="text-gray-900">Always in Key.</span>
           </h2>
@@ -271,21 +270,21 @@ export default function App() {
 
                     {/* NAUTICPLAYER WAVEFORM */}
                     <div className="flex items-center h-full mr-2">
-                      <img src="/captures/statusbar_player.webp" alt="Waveform" className="h-[20px] w-auto drop-shadow-md filter contrast-125 brightness-110" />
+                      <img src="/captures/statusbar_player.webp" alt="Waveform" width="120" height="20" className="h-[20px] w-auto drop-shadow-md filter contrast-125 brightness-110" />
                     </div>
 
                     {/* System Icons */}
                     <div className="flex items-center gap-3">
                       {/* Battery */}
-                      <svg width="24" height="12" viewBox="0 0 24 12" fill="none" stroke="currentColor" strokeWidth="1.2" className="opacity-95 drop-shadow-sm">
+                      <svg aria-hidden="true" width="24" height="12" viewBox="0 0 24 12" fill="none" stroke="currentColor" strokeWidth="1.2" className="opacity-95 drop-shadow-sm">
                         <rect x="1" y="1" width="20" height="10" rx="3" stroke="currentColor" fill="none" />
                         <path d="M23 4v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                         <rect x="3" y="3" width="15" height="6" rx="1" fill="currentColor" stroke="none" />
                       </svg>
                       {/* Wifi */}
-                      <svg width="16" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-sm opacity-95 hidden sm:block"><path d="M5 12.55a11 11 0 0 1 14.08 0" /><path d="M1.42 9a16 16 0 0 1 21.16 0" /><path d="M8.53 16.11a6 6 0 0 1 6.95 0" /><circle cx="12" cy="20" r="2.5" fill="currentColor" stroke="none" /></svg>
+                      <svg aria-hidden="true" width="16" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-sm opacity-95 hidden sm:block"><path d="M5 12.55a11 11 0 0 1 14.08 0" /><path d="M1.42 9a16 16 0 0 1 21.16 0" /><path d="M8.53 16.11a6 6 0 0 1 6.95 0" /><circle cx="12" cy="20" r="2.5" fill="currentColor" stroke="none" /></svg>
                       {/* Search */}
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-sm opacity-95 hidden sm:block"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
+                      <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="drop-shadow-sm opacity-95 hidden sm:block"><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></svg>
                     </div>
 
                     {/* Time */}
@@ -302,7 +301,7 @@ export default function App() {
 
         {/* Section 3: Mini Player */}
         <section className="mb-32 text-center">
-          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 inline-block">
+          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 inline-block text-balance">
             <span className="bg-gradient-to-r from-[#ff6213] to-orange-400 bg-clip-text text-transparent">Your music, </span>
             <span className="text-gray-900">living in the Menu Bar.</span>
           </h2>
@@ -335,7 +334,7 @@ export default function App() {
         {/* Section 1: Mezcla */}
         <section className="mb-20 text-center">
 
-          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 inline-block">
+          <h2 className="text-4xl md:text-[48px] font-bold tracking-tight mb-5 inline-block text-balance">
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Flawless Transitions. </span>
             <span className="text-gray-900">Zero Effort.</span>
           </h2>
@@ -376,7 +375,7 @@ export default function App() {
                 {/* CENTER ICON */}
                 <div className="flex flex-col items-center gap-4">
                   <div className="relative flex flex-col items-center justify-center">
-                    <svg width="64" height="64" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-sm">
+                    <svg aria-hidden="true" width="64" height="64" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-sm">
                       <defs>
                         <linearGradient id="arrow-grad" x1="0" y1="0" x2="48" y2="0" gradientUnits="userSpaceOnUse">
                           <stop offset="0%" stopColor="#2563eb" />
@@ -412,7 +411,7 @@ export default function App() {
           <div className="relative rounded-[2.5rem] md:rounded-[3rem] overflow-hidden bg-[#0a0a0a] text-white p-12 md:p-24 text-center shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] border border-white/10">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[200%] bg-gradient-to-b from-blue-600/20 via-purple-600/10 to-transparent pointer-events-none blur-[100px]"></div>
 
-            <h2 className="text-4xl md:text-[56px] font-bold tracking-tight mb-8 relative z-10 leading-tight">
+            <h2 className="text-4xl md:text-[56px] font-bold tracking-tight mb-8 relative z-10 leading-tight text-balance">
               <span className="bg-gradient-to-r from-gray-100 to-gray-400 bg-clip-text text-transparent">Studio-grade fidelity.</span> <br className="sm:hidden" /> <span className="text-white">Untouched audio.</span>
             </h2>
             <p className="text-[19px] md:text-[22px] text-gray-400 leading-relaxed max-w-3xl mx-auto relative z-10 font-light">
@@ -451,24 +450,24 @@ export default function App() {
 
               <div className="mt-auto relative flex flex-col items-center justify-center h-56 bg-white rounded-2xl border border-gray-200/60 shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] w-full">
                 {/* Floating Track Badge */}
-                <div className="absolute top-6 right-6 sm:right-12 bg-[#0a84ff] text-white font-mono text-[14px] font-bold px-4 py-1.5 rounded-full flex items-center gap-2 shadow-[0_4px_20px_rgba(10,132,255,0.5)] z-10 animate-bounce" style={{ animationDuration: '2.5s' }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" /></svg>
+                <div className="absolute top-6 right-6 sm:right-12 bg-[#0a84ff] text-white font-mono text-[14px] font-bold px-4 py-1.5 rounded-full flex items-center gap-2 shadow-[0_4px_20px_rgba(10,132,255,0.5)] z-10 animate-bounce motion-safe:animate-bounce" style={{ animationDuration: '2.5s' }}>
+                  <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" /></svg>
                   track
                 </div>
 
                 <div className="flex items-center gap-6 sm:gap-6 md:gap-6 md:p-8 translate-y-3">
                   {/* Nautic Side */}
                   <div className="flex flex-col items-center gap-3">
-                    <img src="/icons/np_128x128.png" alt="Nautic" className="w-14 h-14 rounded-[14px] object-cover shadow-md" />
+                    <img src="/icons/np_128x128.png" alt="Nautic" width="56" height="56" className="w-14 h-14 rounded-[14px] object-cover shadow-md" />
                     <span className="text-[14px] text-gray-600 font-semibold tracking-wide">Nautic</span>
                   </div>
 
                   {/* Arrow */}
-                  <svg className="w-6 h-6 text-[#0a84ff] mb-6 stroke-[3px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                  <svg aria-hidden="true" className="w-6 h-6 text-[#0a84ff] mb-6 stroke-[3px]" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
 
                   {/* DAW Side */}
                   <div className="flex flex-col items-center gap-3">
-                    <svg className="w-14 h-14 text-blue-400 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 5 18 3-9h3" /></svg>
+                    <svg aria-hidden="true" className="w-14 h-14 text-blue-400 stroke-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h4l3-9 5 18 3-9h3" /></svg>
                     <span className="text-[14px] text-gray-600 font-semibold tracking-wide">DAW</span>
                   </div>
                 </div>
@@ -494,17 +493,17 @@ export default function App() {
                     <span className="text-2xl md:text-[28px] font-bold text-blue-600">F</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
-                    <svg className="w-7 h-7 text-[#ffd60a] drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" /></svg>
+                    <svg aria-hidden="true" className="w-7 h-7 text-[#ffd60a] drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" /></svg>
                     <span className="text-[14px] text-gray-600 font-medium">Favorites</span>
                   </div>
                 </div>
                 {/* Backspace Key */}
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-[5.5rem] h-16 rounded-[14px] border border-gray-200 bg-white flex items-center justify-center shadow-[0_4px_10px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.1)]">
-                    <svg className="w-8 h-8 text-[#ff453a]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><path d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" /></svg>
+                    <svg aria-hidden="true" className="w-8 h-8 text-[#ff453a]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><path d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" /></svg>
                   </div>
                   <div className="flex flex-col items-center gap-1">
-                    <svg className="w-7 h-7 text-[#ff453a] drop-shadow-sm" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    <svg aria-hidden="true" className="w-7 h-7 text-[#ff453a] drop-shadow-sm" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                     <span className="text-[14px] text-gray-600 font-medium">Trash</span>
                   </div>
                 </div>
@@ -548,10 +547,10 @@ export default function App() {
 
         <section id="buy" className="text-center pt-16 border-t border-gray-100 scroll-mt-32 pb-24">
           <div className="w-16 h-16 mx-auto rounded-[16px] flex items-center justify-center mb-8 overflow-hidden shadow-md border border-black/5 bg-white">
-            <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
+            <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" width="64" height="64" className="w-full h-full object-cover" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 inline-block">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 inline-block text-balance">
             <span className="text-gray-900">Pay once. </span>
             <span className="bg-gradient-to-r from-[#ff6213] to-orange-500 bg-clip-text text-transparent">Own it forever.</span>
           </h2>
@@ -560,7 +559,7 @@ export default function App() {
           </p>
 
           {/* Visual Comparison Card */}
-          <div className="max-w-md mx-auto mb-16 bg-gray-50/50 rounded-3xl border border-gray-200/50 p-8 shadow-sm">
+          <div className="max-w-md mx-auto mb-16 bg-gray-50/50 rounded-3xl border border-gray-200/50 p-8 shadow-sm tabular-nums">
             <div className="grid grid-cols-2 gap-8 text-left">
               <div>
                 <span className="text-[12px] font-bold uppercase tracking-wider text-gray-400 block mb-4">NauticPlayer</span>
@@ -605,15 +604,15 @@ export default function App() {
           <div className="flex flex-col items-center gap-6">
             <button
               onClick={handleBuyClick}
-              className="px-14 py-5 bg-[#ff6213] rounded-[24px] text-white font-bold text-xl shadow-[0_10px_30px_-5px_rgba(255,98,19,0.4)] hover:shadow-[0_15px_35px_-5px_rgba(255,98,19,0.5)] transition-all hover:-translate-y-1 active:translate-y-0"
+              className="px-14 py-5 bg-[#ff6213] rounded-[24px] text-white font-bold text-xl shadow-[0_10px_30px_-5px_rgba(255,98,19,0.4)] hover:shadow-[0_15px_35px_-5px_rgba(255,98,19,0.5)] transition-[box-shadow,transform] hover:-translate-y-1 active:translate-y-0"
             >
               Buy Now — $19.99 · One-Time
             </button>
 
             <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[14px] text-gray-500 font-medium">
-              <span className="flex items-center gap-2"><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>No subscription, ever</span>
-              <span className="flex items-center gap-2"><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>All future updates included</span>
-              <span className="flex items-center gap-2"><svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>One license, one Mac</span>
+              <span className="flex items-center gap-2"><svg aria-hidden="true" className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>No subscription, ever</span>
+              <span className="flex items-center gap-2"><svg aria-hidden="true" className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>All future updates included</span>
+              <span className="flex items-center gap-2"><svg aria-hidden="true" className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>One license, one Mac</span>
             </div>
 
             <div className="mt-12">
@@ -637,7 +636,7 @@ export default function App() {
         </div>
         <div className="hidden sm:flex items-center justify-center">
           <div className="w-6 h-6 rounded flex items-center justify-center overflow-hidden grayscale opacity-70">
-            <img src="/icons/np_64x64.png" alt="NauticPlayer" className="w-full h-full object-cover" />
+            <img src="/icons/np_64x64.png" alt="NauticPlayer" width="24" height="24" className="w-full h-full object-cover" />
           </div>
         </div>
         <div className="flex gap-6">
