@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import type React from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 
 import Success from './Success';
@@ -9,25 +10,45 @@ const DMG_URL = 'https://github.com/nauticsoftware/NauticPlayer-Releases/release
 
 
 const ThemeShowcase = ({ lightImage = "/captures/player-wt.webp", darkImage = "/captures/player-bl.webp", className = "mt-12" }: { lightImage?: string, darkImage?: string, className?: string }) => {
-  const [position, setPosition] = useState(50);
-  const [isHovering, setIsHovering] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const line1Ref = useRef<SVGLineElement>(null);
+  const line2Ref = useRef<SVGLineElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  const updatePosition = (percentage: number, immediate: boolean) => {
+    if (overlayRef.current) {
+      overlayRef.current.style.transition = immediate ? 'none' : 'all 0.7s ease-out';
+      overlayRef.current.style.clipPath = `polygon(0 0, ${percentage + 15}% 0, ${percentage - 15}% 100%, 0 100%)`;
+    }
+    if (svgRef.current) {
+      svgRef.current.style.transition = immediate ? 'none' : 'all 0.7s ease-out';
+    }
+    if (line1Ref.current) {
+      line1Ref.current.setAttribute('x1', `${percentage + 15}%`);
+      line1Ref.current.setAttribute('x2', `${percentage - 15}%`);
+    }
+    if (line2Ref.current) {
+      line2Ref.current.setAttribute('x1', `${percentage + 15}%`);
+      line2Ref.current.setAttribute('x2', `${percentage - 15}%`);
+    }
+  };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
-    // Map the mouse directly to the container width, clamped between 5% and 95%
     let percentage = (x / rect.width) * 100;
     percentage = Math.max(5, Math.min(95, percentage));
-    setPosition(percentage);
+    updatePosition(percentage, true);
   };
 
-  const handleMouseEnter = () => setIsHovering(true);
+  const handleMouseEnter = () => {
+    // No state change needed here if we only care about mouse move
+  };
 
   const handleMouseLeave = () => {
-    setIsHovering(false);
-    setPosition(50);
+    updatePosition(50, false);
   };
 
   return (
@@ -47,31 +68,34 @@ const ThemeShowcase = ({ lightImage = "/captures/player-wt.webp", darkImage = "/
 
       {/* Skin Negra (Overlay con máscara diagonal) */}
       <div
-        className={`absolute inset-0 select-none pointer-events-none ${isHovering ? 'transition-none' : 'transition-all duration-700 ease-out'}`}
-        style={{ clipPath: `polygon(0 0, ${position + 15}% 0, ${position - 15}% 100%, 0 100%)` }}
+        ref={overlayRef}
+        className="absolute inset-0 select-none pointer-events-none transition-all duration-700 ease-out"
+        style={{ clipPath: 'polygon(0 0, 65% 0, 35% 100%, 0 100%)' }}
       >
         <img
           src={darkImage}
           alt="NauticPlayer Dark Theme"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        {/* Sombra interior para darle profundidad 3D a la división */}
         <div className="absolute inset-0 shadow-[inset_-20px_0_30px_-20px_rgba(0,0,0,0.7)] mix-blend-overlay"></div>
       </div>
 
       {/* Línea divisoria elegante (Glass Line) */}
       <svg
-        className={`absolute inset-0 w-full h-full pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,0,0,0.6)] ${isHovering ? 'transition-none' : 'transition-all duration-700 ease-out'}`}
+        ref={svgRef}
+        className="absolute inset-0 w-full h-full pointer-events-none filter drop-shadow-[0_0_8px_rgba(0,0,0,0.6)] transition-all duration-700 ease-out"
         preserveAspectRatio="none"
       >
         <line
-          x1={`${position + 15}%`} y1="0"
-          x2={`${position - 15}%`} y2="100%"
+          ref={line1Ref}
+          x1="65%" y1="0"
+          x2="35%" y2="100%"
           stroke="rgba(255,255,255,0.4)" strokeWidth="3"
         />
         <line
-          x1={`${position + 15}%`} y1="0"
-          x2={`${position - 15}%`} y2="100%"
+          ref={line2Ref}
+          x1="65%" y1="0"
+          x2="35%" y2="100%"
           stroke="rgba(255,255,255,0.9)" strokeWidth="1"
         />
       </svg>
@@ -82,7 +106,13 @@ const ThemeShowcase = ({ lightImage = "/captures/player-wt.webp", darkImage = "/
 
 
 
-const GlassCard = ({ children, className = "", rounded = "rounded-[2rem]" }: any) => (
+interface GlassCardProps {
+  children: React.ReactNode;
+  className?: string;
+  rounded?: string;
+}
+
+const GlassCard = ({ children, className = "", rounded = "rounded-[2rem]" }: GlassCardProps) => (
   <div className={`relative overflow-hidden bg-transparent shadow-[0_6px_6px_rgba(0,0,0,0.2),0_0_20px_rgba(0,0,0,0.1)] ${rounded} ${className}`}>
     <div className="absolute inset-0 backdrop-blur-[4px] z-0"></div>
     <div className="absolute inset-0 bg-white/25 z-10"></div>
@@ -92,15 +122,52 @@ const GlassCard = ({ children, className = "", rounded = "rounded-[2rem]" }: any
     </div>
   </div>
 );
+const DECK_A_WAVEFORM = (
+  <>
+    <div className="w-2 h-[40%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[60%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[30%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[80%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[50%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[30%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[90%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[100%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[70%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[40%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[80%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[60%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[30%] bg-blue-500 rounded-sm"></div>
+    <div className="w-2 h-[20%] bg-blue-500 rounded-sm"></div>
+  </>
+);
+
+const DECK_B_WAVEFORM = (
+  <>
+    <div className="w-2 h-[15%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[20%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[10%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[30%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[20%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[10%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[40%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[25%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[15%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[20%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[30%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[15%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[10%] bg-purple-300 rounded-sm"></div>
+    <div className="w-2 h-[10%] bg-purple-300 rounded-sm"></div>
+  </>
+);
+
 export default function App() {
 
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const currentPath = window.location.pathname;
 
-  const handleBuyClick = (e: React.MouseEvent) => {
+  const handleBuyClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
-    console.log('Redirecting to No-code Dodo Checkout...');
     window.location.href = CHECKOUT_URL;
-  };
+  }, []);
 
   if (currentPath === '/success') {
     return <Success />;
@@ -115,7 +182,7 @@ export default function App() {
         <div className="max-w-5xl mx-auto px-6 flex items-center justify-between">
           {/* Logo + Nombre */}
           <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="pointer-events-auto flex items-center gap-3 no-underline group transition-transform hover:scale-[1.02] active:scale-[0.98]">
-            <div className="w-12 h-12 sm:w-14 h-14 rounded-[14px] flex items-center justify-center overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.08)] bg-white border border-gray-200/50">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-[14px] flex items-center justify-center overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.08)] bg-white border border-gray-200/50">
               <img src="/icons/np_128x128.png" alt="NauticPlayer Logo" className="w-full h-full object-cover" />
             </div>
             <span className="font-semibold text-[20px] sm:text-[22px] text-gray-900 tracking-tight hidden sm:block">
@@ -200,7 +267,7 @@ export default function App() {
                   </div>
 
                   {/* Right side: Status Items */}
-                  <div className="flex items-center gap-2 sm:gap-1.5 sm:gap-3.5 pr-1 sm:pr-2">
+                  <div className="flex items-center gap-2 sm:gap-3.5 pr-1 sm:pr-2">
 
                     {/* NAUTICPLAYER WAVEFORM */}
                     <div className="flex items-center h-full mr-2">
@@ -294,7 +361,7 @@ export default function App() {
             </span>
           </div>
           <GlassCard rounded="rounded-[2.5rem]" className="mt-14 max-w-4xl mx-auto bg-gray-50/50 border border-gray-200/50">
-            <div className="p-6 md:p-8 md:p-16">
+            <div className="p-6 md:p-16">
               <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
 
                 {/* DECK A */}
@@ -302,20 +369,7 @@ export default function App() {
                   <span className="text-blue-600 font-black tracking-widest text-lg md:text-xl">DECK A</span>
                   <div className="w-56 md:w-64 h-24 md:h-28 bg-blue-50/50 border-2 border-blue-200 rounded-2xl flex items-center justify-center gap-1.5 p-4 shadow-[inset_0_0_20px_rgba(59,130,246,0.05)]">
                     {/* Active Waveform */}
-                    <div className="w-2 h-[40%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[60%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[30%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[80%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[50%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[30%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[90%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[100%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[70%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[40%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[80%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[60%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[30%] bg-blue-500 rounded-sm"></div>
-                    <div className="w-2 h-[20%] bg-blue-500 rounded-sm"></div>
+                    {DECK_A_WAVEFORM}
                   </div>
                 </div>
 
@@ -344,20 +398,7 @@ export default function App() {
                   <span className="text-purple-600 font-black tracking-widest text-lg md:text-xl">DECK B</span>
                   <div className="w-56 md:w-64 h-24 md:h-28 bg-purple-50/50 border-2 border-purple-200 rounded-2xl flex items-center justify-center gap-1.5 p-4 shadow-[inset_0_0_20px_rgba(168,85,247,0.05)] opacity-80">
                     {/* Faded/Waiting Waveform */}
-                    <div className="w-2 h-[15%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[20%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[10%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[30%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[20%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[10%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[40%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[25%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[15%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[20%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[30%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[15%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[10%] bg-purple-300 rounded-sm"></div>
-                    <div className="w-2 h-[10%] bg-purple-300 rounded-sm"></div>
+                    {DECK_B_WAVEFORM}
                   </div>
                 </div>
 
@@ -473,7 +514,7 @@ export default function App() {
         </section>
 
         {/* Features Lists */}
-        <section className="grid md:grid-cols-2 gap-6 md:gap-6 md:p-8 md:gap-12 mb-24 max-w-4xl mx-auto text-left">
+        <section className="grid md:grid-cols-2 gap-6 md:gap-12 mb-24 max-w-4xl mx-auto text-left">
           <div>
             <h3 className="text-[19px] font-semibold mb-4 text-gray-900">Features</h3>
             <ul className="list-disc pl-5 space-y-2 text-[15px] text-gray-700 marker:text-gray-400">

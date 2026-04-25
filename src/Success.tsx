@@ -1,6 +1,7 @@
-import React from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle2, FileText, House } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react/dist/esm/icons/check-circle-2';
+import { FileText } from 'lucide-react/dist/esm/icons/file-text';
+import { House } from 'lucide-react/dist/esm/icons/house';
 
 const Success = () => {
   return (
