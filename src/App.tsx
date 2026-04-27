@@ -1,5 +1,7 @@
 import type React from 'react';
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { X, Shield, Mail, Book, Info, ExternalLink, Github } from 'lucide-react';
 
 
 import Success from './Success';
@@ -160,6 +162,19 @@ const DECK_B_WAVEFORM = (
 );
 
 export default function App() {
+  const [activeModal, setActiveModal] = useState<'privacy' | 'contact' | 'docs' | 'about' | null>(null);
+
+  // Bloquear scroll cuando el modal está abierto
+  useEffect(() => {
+    if (activeModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [activeModal]);
 
   const currentPath = window.location.pathname;
 
@@ -632,7 +647,7 @@ export default function App() {
       {/* Footer */}
       <footer id="support" className="max-w-4xl mx-auto px-4 py-12 border-t border-gray-200 text-[14px] text-gray-500 flex flex-col sm:flex-row items-center justify-between mt-12 scroll-mt-32">
         <div className="mb-4 sm:mb-0">
-          © 2026 Nautic Studio. <a href="https://nauticstudio.xyz/#contact" className="text-blue-600 hover:underline">Privacy Policy</a>
+          © 2026 Nautic Studio. <button onClick={() => setActiveModal('privacy')} className="text-blue-600 hover:underline cursor-pointer bg-transparent border-none p-0 font-inherit">Privacy Policy</button>
         </div>
         <div className="hidden sm:flex items-center justify-center">
           <div className="w-6 h-6 rounded flex items-center justify-center overflow-hidden grayscale opacity-70">
@@ -640,11 +655,143 @@ export default function App() {
           </div>
         </div>
         <div className="flex gap-6">
-          <a href="https://nauticstudio.xyz/#contact" className="text-blue-600 hover:underline">Contact</a>
-          <a href="https://github.com/nauticsoftware/NauticPlayer-Releases" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Documentation</a>
-          <a href="https://nauticstudio.xyz/#about" className="text-blue-600 hover:underline">About</a>
+          <button onClick={() => setActiveModal('contact')} className="text-blue-600 hover:underline cursor-pointer bg-transparent border-none p-0 font-inherit">Contact</button>
+          <button onClick={() => setActiveModal('docs')} className="text-blue-600 hover:underline cursor-pointer bg-transparent border-none p-0 font-inherit">Documentation</button>
+          <button onClick={() => setActiveModal('about')} className="text-blue-600 hover:underline cursor-pointer bg-transparent border-none p-0 font-inherit">About</button>
         </div>
       </footer>
+
+      {/* Info Modal System */}
+      <AnimatePresence>
+        {activeModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveModal(null)}
+              className="absolute inset-0 bg-black/40 backdrop-blur-md"
+            />
+            
+            {/* Modal Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-2xl bg-white/90 backdrop-blur-xl rounded-[2.5rem] shadow-[0_30px_60px_-12px_rgba(0,0,0,0.3)] border border-white/50 overflow-hidden"
+            >
+              <div className="absolute top-6 right-6 z-10">
+                <button 
+                  onClick={() => setActiveModal(null)}
+                  className="p-2 rounded-full bg-gray-100/50 hover:bg-gray-200/50 text-gray-500 hover:text-gray-900 transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="p-8 sm:p-12 overflow-y-auto max-h-[80vh] custom-scrollbar">
+                {activeModal === 'privacy' && (
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="p-3 rounded-2xl bg-blue-50 text-blue-600">
+                        <Shield size={32} />
+                      </div>
+                      <h3 className="text-3xl font-bold text-gray-900">Privacy Policy</h3>
+                    </div>
+                    <div className="space-y-4 text-gray-600 leading-relaxed">
+                      <p>At Nautic Studio, we prioritize your privacy. NauticPlayer is designed to be a local-first application.</p>
+                      <h4 className="font-semibold text-gray-900">1. Data Collection</h4>
+                      <p>We do not collect, store, or sell your personal data. All music library analysis and metadata processing happen locally on your Mac.</p>
+                      <h4 className="font-semibold text-gray-900">2. Analytics</h4>
+                      <p>NauticPlayer does not use invasive telemetry. We only receive anonymous crash reports if you explicitly choose to share them via macOS.</p>
+                      <h4 className="font-semibold text-gray-900">3. Payments</h4>
+                      <p>All transactions are processed securely through Dodo Payments. We never see or store your credit card information.</p>
+                    </div>
+                  </div>
+                )}
+
+                {activeModal === 'contact' && (
+                  <div className="space-y-6 text-center">
+                    <div className="flex flex-col items-center gap-4 mb-8">
+                      <div className="p-3 rounded-2xl bg-orange-50 text-[#ff6213]">
+                        <Mail size={32} />
+                      </div>
+                      <h3 className="text-3xl font-bold text-gray-900">Get in Touch</h3>
+                    </div>
+                    <p className="text-gray-600 text-lg mb-8">Have a question or need support with NauticPlayer? We're here to help.</p>
+                    <a 
+                      href="mailto:support@nauticstudio.xyz" 
+                      className="inline-flex items-center gap-3 px-8 py-4 bg-[#ff6213] text-white rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 active:translate-y-0"
+                    >
+                      <Mail size={20} />
+                      support@nauticstudio.xyz
+                    </a>
+                    <div className="pt-8 flex justify-center gap-6 text-gray-400">
+                      <a href="https://twitter.com/nauticstudio" className="hover:text-blue-400 transition-colors">Twitter (X)</a>
+                      <a href="https://github.com/nauticsoftware" className="hover:text-gray-900 transition-colors">GitHub</a>
+                    </div>
+                  </div>
+                )}
+
+                {activeModal === 'docs' && (
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="p-3 rounded-2xl bg-purple-50 text-purple-600">
+                        <Book size={32} />
+                      </div>
+                      <h3 className="text-3xl font-bold text-gray-900">Documentation</h3>
+                    </div>
+                    <div className="grid gap-4">
+                      <div className="p-5 rounded-2xl bg-gray-50 border border-gray-100">
+                        <h4 className="font-bold text-gray-900 mb-2">Getting Started</h4>
+                        <p className="text-gray-600 text-sm">Simply drag and drop your music folders into the app. NauticPlayer will automatically analyze BPM and keys.</p>
+                      </div>
+                      <div className="p-5 rounded-2xl bg-gray-50 border border-gray-100">
+                        <h4 className="font-bold text-gray-900 mb-2">Keyboard Shortcuts</h4>
+                        <ul className="text-sm text-gray-600 space-y-1">
+                          <li><kbd className="bg-white border px-1.5 rounded">Space</kbd> Play / Pause</li>
+                          <li><kbd className="bg-white border px-1.5 rounded">F</kbd> Add to Favorites</li>
+                          <li><kbd className="bg-white border px-1.5 rounded">Backspace</kbd> Move to Trash</li>
+                        </ul>
+                      </div>
+                      <a 
+                        href="https://github.com/nauticsoftware/NauticPlayer-Releases" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between p-5 rounded-2xl bg-blue-600 text-white font-bold group"
+                      >
+                        <span className="flex items-center gap-2"><Github size={20} /> Full Releases Info</span>
+                        <ExternalLink size={18} className="group-hover:translate-x-1 transition-transform" />
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {activeModal === 'about' && (
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-600">
+                        <Info size={32} />
+                      </div>
+                      <h3 className="text-3xl font-bold text-gray-900">About Nautic Studio</h3>
+                    </div>
+                    <div className="space-y-4 text-gray-600 leading-relaxed">
+                      <p className="text-lg">We believe in software that you own, not software that you rent.</p>
+                      <p>Nautic Studio was founded to create high-performance, native macOS applications for creators and music lovers. We focus on minimalism, efficiency, and respect for the user.</p>
+                      <div className="pt-4 p-6 rounded-3xl bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+                        <p className="italic font-light">"NauticPlayer is the result of years of frustration with bloated, subscription-based players. We wanted something that just works, sounds incredible, and disappears into the background."</p>
+                        <p className="mt-4 font-bold text-emerald-400">— The Nautic Team</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
